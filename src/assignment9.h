@@ -28,7 +28,15 @@ namespace Aftr
         virtual void onMouseMove(const SDL_MouseMotionEvent& e);
         virtual void onKeyDown(const SDL_KeyboardEvent& key);
         virtual void onKeyUp(const SDL_KeyboardEvent& key);
-
+        virtual bool hasReachedEndpoint();
+        virtual void performSecondaryFrustumCulling();
+        virtual VectorT<float> getPosition(WO* obj);
+        virtual VectorT<float> getForward(WO* obj);
+        virtual VectorT<float> getUp(WO* obj);
+        virtual VectorT<float> getRight(WO* obj);
+        Mat4 customPerspective(float fov, float aspectRatio, float nearPlane, float farPlane);
+        Mat4 customLookAt(const VectorT<float>& eye, const VectorT<float>& target, const VectorT<float>& up);
+    
     protected:
         GLViewNewModule();
         virtual void onCreate();
@@ -42,6 +50,8 @@ namespace Aftr
         Vector endPos;   // End position (point B)
 
         Frustum frustum; // Main camera frustum for culling
+        bool isboxmovig = false;
+
     };
 
 } // namespace Aftr
